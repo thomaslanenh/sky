@@ -11,7 +11,7 @@ namespace SKY
             return "Hi";
         }
 
-        public object[] GrabNote(string beat)
+        public (int Note, int X, int Y) GrabNote(string beat)
         {
 
             return South.GrabNote(beat);

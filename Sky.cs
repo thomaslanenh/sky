@@ -17,13 +17,11 @@ namespace SKY
         private SpriteBatch _spriteBatch;
         private List<SoundEffect> soundEffects;
 
-
         private Texture2D gemLeft;
         private Texture2D gemRight;
         private Texture2D arrow;
 
         private float angle = 0;
-
 
         private int score = 0;
 
@@ -35,7 +33,8 @@ namespace SKY
         // load our Song
         private readonly InternalSong song = new();
 
-      
+        private int CurrentNote;
+
         public Sky()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -44,7 +43,6 @@ namespace SKY
             soundEffects = new List<SoundEffect>();
 
         }
-
 
         public static string Truncate(string value, int maxLength)
         {
@@ -66,8 +64,6 @@ namespace SKY
             // TODO: use this.Content to load your game content here
             arrow = Content.Load<Texture2D>("arrow");
             Texture2D texture = Content.Load<Texture2D>("SmileyWalk");
-
-       
 
             // Gem Left
             gemLeft = Content.Load<Texture2D>("Coin");
@@ -138,19 +134,20 @@ namespace SKY
 
         protected void CheckBeat(InternalSong sentSong, TimeSpan time)
         {
-            object[] beatTF = new object[] {  };
-
-            beatTF = sentSong.GrabNote(GetHumanReadableTime(time));
+         
+            var beatTF = sentSong.GrabNote(GetHumanReadableTime(time));
 
              // Check Note
-            if ((int)beatTF[0] == 1)
+            if (beatTF.Note == 1)
             {
-                _spriteBatch.Draw(gemLeft, new Vector2((int)beatTF[1], (int)beatTF[2]), Color.White);
+                CurrentNote = 1;
+                _spriteBatch.Draw(gemLeft, new Vector2(beatTF.X, beatTF.Y), Color.White);
                 
             }
-            if ((int)beatTF[0] == 2)
+            if (beatTF.Note == 2)
             {
-                _spriteBatch.Draw(gemRight, new Vector2((int)beatTF[1], (int)beatTF[2]), Color.White);
+                CurrentNote = 2;
+                _spriteBatch.Draw(gemRight, new Vector2(beatTF.X, beatTF.Y), Color.White);
                 
             }
 
@@ -186,13 +183,25 @@ namespace SKY
             // Left Beat
             if (beatA)
             {
-
-                leftSound.Play();
+                if (CurrentNote == 1)
+                {
+                    leftSound.Play();
+                    score = score + 10;
+                    CurrentNote = 0;
+                    return;
+                }
+                
             }
 
             if (beatB)
             {
-                rightSound.Play();
+                if (CurrentNote == 2)
+                {
+                    rightSound.Play();
+                    score = score + 10;
+                    CurrentNote = 0;
+                    return;
+                }
             }
         }
 
@@ -212,8 +221,6 @@ namespace SKY
 
             // TODO: Add your update logic here
 
-            score++;
-
         
             base.Update(gameTime);
         }
@@ -230,17 +237,16 @@ namespace SKY
             Rectangle sourceRectangle = new Rectangle(0, 0, arrow.Width, arrow.Height);
             Vector2 origin = new Vector2(arrow.Width / 2, arrow.Height);
 
+            _spriteBatch.DrawString(font, "Score: " + score, new Vector2(100,100), Color.Black);
             _spriteBatch.DrawString(font, GetHumanReadableTime(time) + " / " + GetHumanReadableTime(songTime), new Vector2(100, 150), Color.Black);
 
             prevTime = Truncate(prevTime, 4);
 
             if (prevTime != time.ToString())
             {
-        
                 CheckBeat(song, time);
                 prevTime = time.ToString();
             }
-          
 
             _spriteBatch.Draw(arrow, location, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
             

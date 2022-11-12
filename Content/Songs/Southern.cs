@@ -37,21 +37,18 @@ namespace SKY.Content.Songs
         }};
 
 
-        public object[] GrabNote(string beat)
+        public (int Note, int X, int Y) GrabNote(string beat)
         {
-            
-            if (Gems.FirstOrDefault(gem => gem.Beat == beat) != null)
+            var found = Gems.FirstOrDefault(gem => gem.Beat == beat);
+            if (found != null)
             {
-                ChartMap FoundBeat = new ChartMap();
-                FoundBeat = Gems.FirstOrDefault(gem => gem.Beat == beat);
-
-                
-                return new object[] { FoundBeat.Note, FoundBeat.loc.X, FoundBeat.loc.Y };
+                return (found.Note, found.loc.X, found.loc.Y);
             }
             else
             {
-                return new object[] {0, new Point(0,0)};
+                return (0, 0, 0);
             }
+           
         }
     }
 
