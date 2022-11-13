@@ -20,6 +20,7 @@ namespace SKY
         private Texture2D gemLeft;
         private Texture2D gemRight;
         private Texture2D arrow;
+        private Texture2D ghost;
 
         private float angle = 0;
 
@@ -30,8 +31,19 @@ namespace SKY
         
         private string prevTime = "00:00";
 
+        private enum GameStates {
+                START,
+                OPTIONS,
+                LOAD_SONG,
+                SONG_IN_GAME
+            };
+
+        GameStates CurrentState = GameStates.START;
+
         // load our Song
         private readonly InternalSong song = new();
+
+        private MainMenu menu = new();
 
         private int CurrentNote;
 
@@ -42,8 +54,25 @@ namespace SKY
             IsMouseVisible = true;
             soundEffects = new List<SoundEffect>();
 
+            // Subscribe to when a song "Loads".
+            song.LoadedSong += AlertNewSong;
+            // Then actually "load" the song.
+            song.LoadSong("Test");
+            // Then unsubscribe from the event
+            song.LoadedSong -= AlertNewSong;
         }
 
+        // Test Event Function
+        public static void AlertNewSong()
+        {
+            Debug.WriteLine("New Song Loading");
+        }
+
+        public static void ChangeGameState() 
+        {
+            Debug.WriteLine("New Menu State");
+
+        }
         public static string Truncate(string value, int maxLength)
         {
             if (string.IsNullOrEmpty(value)) return value;
@@ -52,8 +81,7 @@ namespace SKY
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            // TODO: Add your initialization logic 
             base.Initialize();
         }
 
@@ -76,7 +104,12 @@ namespace SKY
 
             songNew = Content.Load<Song>("fuckit");
             font = Content.Load<SpriteFont>("File");
-            // MediaPlayer.Play(songNew);
+            MediaPlayer.Play(songNew);
+            // Mute Song
+            MediaPlayer.Volume = 0;
+
+            // Load Menu Icons
+            ghost = Content.Load<Texture2D>("pngwing.com");
         }
 
         public string GetHumanReadableTime(TimeSpan time)
@@ -160,53 +193,99 @@ namespace SKY
 
             bool rightKeyboardArrow = state.IsKeyDown(Keys.Right);
 
-            bool beatA = state.IsKeyDown(Keys.LeftShift);
-            bool beatB = state.IsKeyDown(Keys.Space);
+            bool upKeyboardArrow = state.IsKeyDown(Keys.Up);
 
-            var leftSound = soundEffects[0].CreateInstance();
-            leftSound.IsLooped = false;
+            bool downKeyboardArrow = state.IsKeyDown(Keys.Down);
 
-            var rightSound = soundEffects[1].CreateInstance();
-            rightSound.IsLooped = false;
+            bool enterKeyboardButton = state.IsKeyDown(Keys.Enter);
 
-            // movement
-            if (leftKeyboardArrow)
+            // If current state is in game
+            if (CurrentState == GameStates.SONG_IN_GAME)
             {
-                angle -= 0.1f;
-            }
-            if (rightKeyboardArrow)
-            {
-                angle += 0.1f;
-            }
+                bool beatA = state.IsKeyDown(Keys.LeftShift);
+                bool beatB = state.IsKeyDown(Keys.Space);
 
-            // beats
-            // Left Beat
-            if (beatA)
-            {
-                if (CurrentNote == 1)
+                var leftSound = soundEffects[0].CreateInstance();
+                leftSound.IsLooped = false;
+
+                var rightSound = soundEffects[1].CreateInstance();
+                rightSound.IsLooped = false;
+
+                // movement
+                if (leftKeyboardArrow)
                 {
-                    leftSound.Play();
-                    score = score + 10;
-                    CurrentNote = 0;
-                    // flag beat for delete 
-                    return;
+                    angle -= 0.1f;
                 }
-                
+                if (rightKeyboardArrow)
+                {
+                    angle += 0.1f;
+                }
+
+                // beats
+                // Left Beat
+                if (beatA)
+                {
+                    if (CurrentNote == 1)
+                    {
+                        leftSound.Play();
+                        score = score + 10;
+                        CurrentNote = 0;
+                        // flag beat for delete 
+                        return;
+                    }
+
+                }
+
+                if (beatB)
+                {
+                    if (CurrentNote == 2)
+                    {
+                        rightSound.Play();
+                        score = score + 10;
+                        CurrentNote = 0;
+                        return;
+                    }
+                }
             }
 
-            if (beatB)
+
+            // If current state is main menu
+            if (CurrentState == GameStates.START)
             {
-                if (CurrentNote == 2)
+
+                static void StartGameIcon()
                 {
-                    rightSound.Play();
-                    score = score + 10;
-                    CurrentNote = 0;
-                    return;
+                    Debug.WriteLine("Moving icon to Start Game");
                 }
+
+                static void OptionsIcon()
+                {
+                    Debug.WriteLine("Moving icon to Options Icon");
+                }
+
+                if (enterKeyboardButton)
+                {
+                    menu.ChangeMenu += ChangeGameState;
+                    menu.SelectOption();
+                    menu.ChangeMenu -= ChangeGameState;
+                }
+                if (upKeyboardArrow)
+                {
+                    menu.ChangeCursorPositionUp += StartGameIcon;
+                    menu.ChangeCursorPosition("up");
+                    menu.ChangeCursorPositionUp -= StartGameIcon;
+                }
+                if (downKeyboardArrow)
+                {
+                    menu.ChangeCursorPositionDown += OptionsIcon;
+                    menu.ChangeCursorPosition("down");
+                    menu.ChangeCursorPositionDown -= OptionsIcon;
+                }
+
             }
+            
         }
 
-   
         protected override void Update(GameTime gameTime)
         {
             KeyboardState state = Keyboard.GetState();
@@ -220,15 +299,11 @@ namespace SKY
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
-        
             base.Update(gameTime);
         }
 
-        protected override void Draw(GameTime gameTime)
+        private void RenderSong(GameTime gameTime)
         {
-
             GraphicsDevice.Clear(Color.White);
             TimeSpan time = MediaPlayer.PlayPosition;
             TimeSpan songTime = songNew.Duration;
@@ -238,7 +313,7 @@ namespace SKY
             Rectangle sourceRectangle = new Rectangle(0, 0, arrow.Width, arrow.Height);
             Vector2 origin = new Vector2(arrow.Width / 2, arrow.Height);
 
-            _spriteBatch.DrawString(font, "Score: " + score, new Vector2(100,100), Color.Black);
+            _spriteBatch.DrawString(font, "Score: " + score, new Vector2(100, 100), Color.Black);
             _spriteBatch.DrawString(font, GetHumanReadableTime(time) + " / " + GetHumanReadableTime(songTime), new Vector2(100, 150), Color.Black);
 
             prevTime = Truncate(prevTime, 4);
@@ -250,10 +325,39 @@ namespace SKY
             }
 
             _spriteBatch.Draw(arrow, location, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
-            
+
             base.Draw(gameTime);
 
             _spriteBatch.End();
+        }
+
+        private void StartMenu(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.AliceBlue);
+
+            Vector2 location = new Vector2(250, menu.CursorY);
+            Rectangle sourceRectangle = new Rectangle(0, 0, ghost.Width, ghost.Height);
+            Vector2 origin = new Vector2(ghost.Width / 2, ghost.Height);
+
+            // Draw Main Menu
+            _spriteBatch.Begin();
+            _spriteBatch.DrawString(font, "SKY", new Vector2(100, 100), Color.Black);
+            _spriteBatch.DrawString(font, "START GAME", new Vector2(320, 220), Color.Black);
+            _spriteBatch.DrawString(font, "OPTIONS", new Vector2(320, 275), Color.Black);
+            _spriteBatch.Draw(ghost, location, sourceRectangle, Color.White, 0f, new Vector2(0,0), .1f, SpriteEffects.None, 1);
+            _spriteBatch.End();
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            if (CurrentState == GameStates.START)
+            {
+                StartMenu(gameTime);
+            }
+            if (CurrentState == GameStates.SONG_IN_GAME)
+            {
+                RenderSong(gameTime);
+            }
         }
     }
 }

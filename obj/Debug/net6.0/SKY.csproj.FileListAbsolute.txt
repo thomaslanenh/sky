@@ -78,3 +78,4 @@ C:\Users\disne\Desktop\Dev\cgames\sky\obj\Debug\net6.0\refint\SKY.dll
 C:\Users\disne\Desktop\Dev\cgames\sky\obj\Debug\net6.0\SKY.pdb
 C:\Users\disne\Desktop\Dev\cgames\sky\obj\Debug\net6.0\SKY.genruntimeconfig.cache
 C:\Users\disne\Desktop\Dev\cgames\sky\obj\Debug\net6.0\ref\SKY.dll
+C:\Users\disne\source\repos\SKY\bin\Debug\net6.0\Content\ghost.xnb
