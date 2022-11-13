@@ -1,12 +1,12 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/disne/source/repos/SKY/Content/arrow.png","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/arrow.xnb","TextureProcessor","Texture2DContent",2024,16085,0.1988874
-"C:/Users/disne/source/repos/SKY/Content/Coin.gif","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/Coin.xnb","TextureProcessor","Texture2DContent",298,1877,0.1297201
-"C:/Users/disne/source/repos/SKY/Content/earth.png","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/earth.xnb","TextureProcessor","Texture2DContent",52980,133301,0.1826425
-"C:/Users/disne/source/repos/SKY/Content/File.spritefont","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/Score.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21535,0.2161359
-"C:/Users/disne/source/repos/SKY/Content/fuckit.mp3","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/fuckit.xnb","SongProcessor","SongContent",4577816,124,2.2451198
-"C:/Users/disne/source/repos/SKY/Content/leftsound.wav","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/leftsound.xnb","SoundEffectProcessor","SoundEffectContent",88936,88305,0.4038639
-"C:/Users/disne/source/repos/SKY/Content/rightsound.wav","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/rightsound.xnb","SoundEffectProcessor","SoundEffectContent",353536,352905,0.1076483
-"C:/Users/disne/source/repos/SKY/Content/shuttle.png","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/shuttle.xnb","TextureProcessor","Texture2DContent",9105,125045,0.0059317
-"C:/Users/disne/source/repos/SKY/Content/SmileyWalk.png","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/SmileyWalk.xnb","TextureProcessor","Texture2DContent",40026,262229,0.1246259
-"C:/Users/disne/source/repos/SKY/Content/stars.jpg","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/stars.xnb","TextureProcessor","Texture2DContent",150614,1920085,0.0733761
-"C:/Users/disne/source/repos/SKY/Content/Tyrano Lair.gif","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/Tyrano Lair.xnb","TextureProcessor","Texture2DContent",208,2965,0.003357
+"C:/Users/disne/Desktop/Dev/cgames/sky/Content/arrow.png","C:/Users/disne/Desktop/Dev/cgames/sky/Content/bin/DesktopGL/Content/arrow.xnb","TextureProcessor","Texture2DContent",2024,16085,0.1651788
+"C:/Users/disne/Desktop/Dev/cgames/sky/Content/Coin.gif","C:/Users/disne/Desktop/Dev/cgames/sky/Content/bin/DesktopGL/Content/Coin.xnb","TextureProcessor","Texture2DContent",298,1877,0.0043455
+"C:/Users/disne/Desktop/Dev/cgames/sky/Content/earth.png","C:/Users/disne/Desktop/Dev/cgames/sky/Content/bin/DesktopGL/Content/earth.xnb","TextureProcessor","Texture2DContent",52980,133301,0.0085722
+"C:/Users/disne/Desktop/Dev/cgames/sky/Content/File.spritefont","C:/Users/disne/Desktop/Dev/cgames/sky/Content/bin/DesktopGL/Content/Score.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21535,0.1178949
+"C:/Users/disne/Desktop/Dev/cgames/sky/Content/fuckit.mp3","C:/Users/disne/Desktop/Dev/cgames/sky/Content/bin/DesktopGL/Content/fuckit.xnb","SongProcessor","SongContent",4577816,124,3.412758
+"C:/Users/disne/Desktop/Dev/cgames/sky/Content/leftsound.wav","C:/Users/disne/Desktop/Dev/cgames/sky/Content/bin/DesktopGL/Content/leftsound.xnb","SoundEffectProcessor","SoundEffectContent",88936,88305,0.1742101
+"C:/Users/disne/Desktop/Dev/cgames/sky/Content/rightsound.wav","C:/Users/disne/Desktop/Dev/cgames/sky/Content/bin/DesktopGL/Content/rightsound.xnb","SoundEffectProcessor","SoundEffectContent",353536,352905,0.167038
+"C:/Users/disne/Desktop/Dev/cgames/sky/Content/shuttle.png","C:/Users/disne/Desktop/Dev/cgames/sky/Content/bin/DesktopGL/Content/shuttle.xnb","TextureProcessor","Texture2DContent",9105,125045,0.0068798
+"C:/Users/disne/Desktop/Dev/cgames/sky/Content/SmileyWalk.png","C:/Users/disne/Desktop/Dev/cgames/sky/Content/bin/DesktopGL/Content/SmileyWalk.xnb","TextureProcessor","Texture2DContent",40026,262229,0.0147534
+"C:/Users/disne/Desktop/Dev/cgames/sky/Content/stars.jpg","C:/Users/disne/Desktop/Dev/cgames/sky/Content/bin/DesktopGL/Content/stars.xnb","TextureProcessor","Texture2DContent",150614,1920085,0.0931135
+"C:/Users/disne/Desktop/Dev/cgames/sky/Content/Tyrano Lair.gif","C:/Users/disne/Desktop/Dev/cgames/sky/Content/bin/DesktopGL/Content/Tyrano Lair.xnb","TextureProcessor","Texture2DContent",208,2965,0.0044577

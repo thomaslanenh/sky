@@ -76,7 +76,7 @@ namespace SKY
 
             songNew = Content.Load<Song>("fuckit");
             font = Content.Load<SpriteFont>("File");
-            MediaPlayer.Play(songNew);
+            // MediaPlayer.Play(songNew);
         }
 
         public string GetHumanReadableTime(TimeSpan time)
@@ -188,6 +188,7 @@ namespace SKY
                     leftSound.Play();
                     score = score + 10;
                     CurrentNote = 0;
+                    // flag beat for delete 
                     return;
                 }
                 

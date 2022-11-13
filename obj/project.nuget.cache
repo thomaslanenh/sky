@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RaPIUhew8BholOle8JmLWKbXSr9SWPK81qQhNlnTMzDYa7eEGD5m6MK8QEyJCb91ynP162oTNV9F9a2ftmZfNg==",
+  "dgSpecHash": "TeYGWSQ+9gIoewAXXxPDIE/CxPWf5Tc48luttIXN2eicWo7MRqbyn80KUi1xlGDjk2bIPDpW5WDp/sSmvqvedg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\disne\\source\\repos\\SKY\\SKY.csproj",
+  "projectFilePath": "C:\\Users\\disne\\Desktop\\Dev\\cgames\\sky\\SKY.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\disne\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
     "C:\\Users\\disne\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",

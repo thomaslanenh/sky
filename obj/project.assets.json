@@ -144,11 +144,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\disne\\source\\repos\\SKY\\SKY.csproj",
+      "projectUniqueName": "C:\\Users\\disne\\Desktop\\Dev\\cgames\\sky\\SKY.csproj",
       "projectName": "SKY",
-      "projectPath": "C:\\Users\\disne\\source\\repos\\SKY\\SKY.csproj",
+      "projectPath": "C:\\Users\\disne\\Desktop\\Dev\\cgames\\sky\\SKY.csproj",
       "packagesPath": "C:\\Users\\disne\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\disne\\source\\repos\\SKY\\obj\\",
+      "outputPath": "C:\\Users\\disne\\Desktop\\Dev\\cgames\\sky\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\disne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -196,8 +196,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -206,7 +205,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
