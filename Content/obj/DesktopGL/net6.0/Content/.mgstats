@@ -9,5 +9,7 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "C:/Users/disne/source/repos/SKY/Content/rightsound.wav","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/rightsound.xnb","SoundEffectProcessor","SoundEffectContent",353536,352905,0.1129113
 "C:/Users/disne/source/repos/SKY/Content/shuttle.png","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/shuttle.xnb","TextureProcessor","Texture2DContent",9105,125045,0.0069168
 "C:/Users/disne/source/repos/SKY/Content/SmileyWalk.png","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/SmileyWalk.xnb","TextureProcessor","Texture2DContent",40026,262229,0.0115203
+"C:/Users/disne/source/repos/SKY/Content/SongFiles/And Then - Old Iron.mp3","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/SongFiles/And Then - Old Iron.xnb","SongProcessor","SongContent",6038214,137,3.1538193
+"C:/Users/disne/source/repos/SKY/Content/SoundEffects/soundselect.wav","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/SoundEffects/soundselect.xnb","SoundEffectProcessor","SoundEffectContent",1356972,1357033,0.2366358
 "C:/Users/disne/source/repos/SKY/Content/stars.jpg","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/stars.xnb","TextureProcessor","Texture2DContent",150614,1920085,0.0804237
 "C:/Users/disne/source/repos/SKY/Content/Tyrano Lair.gif","C:/Users/disne/source/repos/SKY/Content/bin/DesktopGL/Content/Tyrano Lair.xnb","TextureProcessor","Texture2DContent",208,2965,0.0033127

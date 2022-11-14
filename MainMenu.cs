@@ -17,6 +17,8 @@ namespace SKY
 
         private MenuOptions _options;
 
+        public string CurrentItem = "START";
+
         public void SelectOption()
         {
             // alert main game that option changed
@@ -34,6 +36,7 @@ namespace SKY
                     }
                     else
                     {
+                        CurrentItem = "START";
                         CursorY = 200;
                         ChangeCursorPositionUp?.Invoke();
                         break;
@@ -45,6 +48,7 @@ namespace SKY
                     }
                     else
                     {
+                        CurrentItem = "OPTIONS";
                         CursorY = 250;
                         ChangeCursorPositionDown?.Invoke();
                         break;

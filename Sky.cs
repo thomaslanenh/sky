@@ -27,6 +27,7 @@ namespace SKY
         private int score = 0;
 
         protected Song songNew;
+        protected Song menuSong;
         protected SpriteFont font;
         
         private string prevTime = "00:00";
@@ -47,32 +48,19 @@ namespace SKY
 
         private int CurrentNote;
 
+        private bool isPlaying;
+
         public Sky()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             soundEffects = new List<SoundEffect>();
-
-            // Subscribe to when a song "Loads".
-            song.LoadedSong += AlertNewSong;
-            // Then actually "load" the song.
-            song.LoadSong("Test");
-            // Then unsubscribe from the event
-            song.LoadedSong -= AlertNewSong;
+            isPlaying = false;
         }
 
         // Test Event Function
-        public static void AlertNewSong()
-        {
-            Debug.WriteLine("New Song Loading");
-        }
-
-        public static void ChangeGameState() 
-        {
-            Debug.WriteLine("New Menu State");
-
-        }
+    
         public static string Truncate(string value, int maxLength)
         {
             if (string.IsNullOrEmpty(value)) return value;
@@ -101,15 +89,26 @@ namespace SKY
 
             soundEffects.Add(Content.Load<SoundEffect>("leftsound"));
             soundEffects.Add(Content.Load<SoundEffect>("rightsound"));
+            soundEffects.Add(Content.Load<SoundEffect>("./SoundEffects/soundselect"));
 
+            // main menu song
+            menuSong = Content.Load<Song>("./SongFiles/And Then - Old Iron");
+
+            // in game test song
             songNew = Content.Load<Song>("fuckit");
+
             font = Content.Load<SpriteFont>("File");
-            MediaPlayer.Play(songNew);
-            // Mute Song
-            MediaPlayer.Volume = 0;
+
 
             // Load Menu Icons
             ghost = Content.Load<Texture2D>("pngwing.com");
+        }
+
+        public static void ChangeGameState()
+        {
+
+            Debug.WriteLine("New Menu State");
+
         }
 
         public string GetHumanReadableTime(TimeSpan time)
@@ -252,6 +251,8 @@ namespace SKY
             // If current state is main menu
             if (CurrentState == GameStates.START)
             {
+                var selectSound = soundEffects[2].CreateInstance();
+
 
                 static void StartGameIcon()
                 {
@@ -268,6 +269,18 @@ namespace SKY
                     menu.ChangeMenu += ChangeGameState;
                     menu.SelectOption();
                     menu.ChangeMenu -= ChangeGameState;
+                    switch (menu.CurrentItem)
+                    {
+                        case "START":
+                            CurrentState = GameStates.SONG_IN_GAME;
+                            break;
+                        case "OPTIONS":
+                            CurrentState = GameStates.OPTIONS;
+                            break;
+                    }
+                    selectSound.Play();
+                    isPlaying = false;
+
                 }
                 if (upKeyboardArrow)
                 {
@@ -304,6 +317,13 @@ namespace SKY
 
         private void RenderSong(GameTime gameTime)
         {
+
+            if (!isPlaying)
+            {
+                MediaPlayer.Play(songNew);
+                isPlaying = true;
+            }
+
             GraphicsDevice.Clear(Color.White);
             TimeSpan time = MediaPlayer.PlayPosition;
             TimeSpan songTime = songNew.Duration;
@@ -333,6 +353,15 @@ namespace SKY
 
         private void StartMenu(GameTime gameTime)
         {
+            var selectSound = soundEffects[2].CreateInstance();
+
+            if (!isPlaying)
+            {
+                MediaPlayer.Play(menuSong);
+                isPlaying = true;
+            }
+
+
             GraphicsDevice.Clear(Color.AliceBlue);
 
             Vector2 location = new Vector2(250, menu.CursorY);
