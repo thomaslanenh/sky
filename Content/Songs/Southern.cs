@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace SKY.Content.Songs
         List<ChartMap> Gems = new List<ChartMap>() { new ChartMap() {
             Beat = "0:02",
             Note = 2,
-            loc = new Point(200,400),
+            loc = new Point(600,400),
             PowerUp = false
         }, new ChartMap() {
             Beat = "0:05",
@@ -27,13 +28,13 @@ namespace SKY.Content.Songs
         }, new ChartMap() {
             Beat = "0:08",
             Note = 2,
-            loc = new Point(200, 200),
+            loc = new Point(220, 200),
             PowerUp = false
         },
         new ChartMap() {
             Beat = "0:12",
             Note = 1,
-            loc = new Point(200, 400),
+            loc = new Point(20, 400),
             PowerUp = false
         }};
 
@@ -55,14 +56,14 @@ namespace SKY.Content.Songs
             {
                 Beat = "0:08",
                 Note = 2,
-                loc = new Point(200, 200),
+                loc = new Point(500, 900),
                 PowerUp = false
             });
             charts.Enqueue(new ChartMap()
             {
                 Beat = "0:12",
                 Note = 1,
-                loc = new Point(200, 400),
+                loc = new Point(20, 800),
                 PowerUp = false
             });
         }
@@ -95,6 +96,4 @@ namespace SKY.Content.Songs
            
         }
     }
-
-
 }

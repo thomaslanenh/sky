@@ -32,6 +32,8 @@ namespace SKY
         
         private string prevTime = "00:00";
 
+        private bool hasRun = false;
+
         private enum GameStates {
                 START,
                 OPTIONS,
@@ -50,6 +52,15 @@ namespace SKY
 
         private bool isPlaying;
 
+        private int beatX = 0;
+
+        private int beatY = 0;
+
+        private int beatNote = 0;
+
+        private bool initSong = false;
+
+        private bool hasRendered = false;
         public Sky()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -57,6 +68,7 @@ namespace SKY
             IsMouseVisible = true;
             soundEffects = new List<SoundEffect>();
             isPlaying = false;
+
         }
 
         // Test Event Function
@@ -109,6 +121,11 @@ namespace SKY
 
             Debug.WriteLine("New Menu State");
 
+        }
+
+        public static void ChangeHasRun()
+        {
+            Debug.WriteLine("Need to change!");
         }
 
         public string GetHumanReadableTime(TimeSpan time)
@@ -164,33 +181,22 @@ namespace SKY
             return rInt;
         }
 
-        protected void CheckBeat(InternalSong sentSong, TimeSpan time)
+        protected void CheckBeat()
         {
-         
-            var beatTF = sentSong.GrabNote(GetHumanReadableTime(time));
 
-            var beatX = beatTF.X;
-            var beatY = beatTF.Y;
-
-             // Check Note
-            if (beatTF.Note == 1)
+            Debug.WriteLine("Init Song is: {0}", initSong);
+                
+            // Check Note
+            if (beatNote == 1)
             {
                 CurrentNote = 1;
                 _spriteBatch.Draw(gemLeft, new Vector2(beatX, beatY), Color.White);
-                
             }
-            if (beatTF.Note == 2)
+            if (beatNote == 2)
             {
                 CurrentNote = 2;
                 _spriteBatch.Draw(gemRight, new Vector2(beatX, beatY), Color.White);
             }
-
-            if (beatX != 0 && beatY != 0)
-            {
-                beatX--;
-                beatY--;
-            }
-
         }
 
         protected void CheckButtons(KeyboardState state)
@@ -324,6 +330,9 @@ namespace SKY
 
         private void RenderSong(GameTime gameTime)
         {
+            Vector2 location = new Vector2(400, 240);
+            Rectangle sourceRectangle = new Rectangle(0, 0, arrow.Width, arrow.Height);
+            Vector2 origin = new Vector2(arrow.Width / 2, arrow.Height);
 
             if (!isPlaying)
             {
@@ -336,10 +345,6 @@ namespace SKY
             TimeSpan songTime = songNew.Duration;
 
             _spriteBatch.Begin();
-            Vector2 location = new Vector2(400, 240);
-            Rectangle sourceRectangle = new Rectangle(0, 0, arrow.Width, arrow.Height);
-            Vector2 origin = new Vector2(arrow.Width / 2, arrow.Height);
-
             _spriteBatch.DrawString(font, "Score: " + score, new Vector2(100, 100), Color.Black);
             _spriteBatch.DrawString(font, GetHumanReadableTime(time) + " / " + GetHumanReadableTime(songTime), new Vector2(100, 150), Color.Black);
 
@@ -347,7 +352,24 @@ namespace SKY
 
             if (prevTime != time.ToString())
             {
-                CheckBeat(song, time);
+                if (initSong == false)
+                {
+                    var beatTF = song.GrabNote(GetHumanReadableTime(time));
+
+                    if (beatTF.Note == 0 && beatTF.X == 0 && beatTF.Y == 0)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        beatX = beatTF.X;
+                        beatY = beatTF.Y;
+                        beatNote = beatTF.Note;
+                        initSong = true;
+                    }
+                }
+                CheckBeat(
+                    );
                 prevTime = time.ToString();
             }
 

@@ -15,8 +15,6 @@ namespace SKY
             OPTIONS_MENU
         }
 
-        private MenuOptions _options;
-
         public string CurrentItem = "START";
 
         public void SelectOption()
