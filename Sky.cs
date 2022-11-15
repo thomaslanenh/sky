@@ -358,6 +358,7 @@ namespace SKY
 
                     if (beatTF.Note == 0 && beatTF.X == 0 && beatTF.Y == 0)
                     {
+                        _spriteBatch.End();
                         return;
                     }
                     else
