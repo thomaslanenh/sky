@@ -169,20 +169,27 @@ namespace SKY
          
             var beatTF = sentSong.GrabNote(GetHumanReadableTime(time));
 
+            var beatX = beatTF.X;
+            var beatY = beatTF.Y;
+
              // Check Note
             if (beatTF.Note == 1)
             {
                 CurrentNote = 1;
-                _spriteBatch.Draw(gemLeft, new Vector2(beatTF.X, beatTF.Y), Color.White);
+                _spriteBatch.Draw(gemLeft, new Vector2(beatX, beatY), Color.White);
                 
             }
             if (beatTF.Note == 2)
             {
                 CurrentNote = 2;
-                _spriteBatch.Draw(gemRight, new Vector2(beatTF.X, beatTF.Y), Color.White);
-                
+                _spriteBatch.Draw(gemRight, new Vector2(beatX, beatY), Color.White);
             }
 
+            if (beatX != 0 && beatY != 0)
+            {
+                beatX--;
+                beatY--;
+            }
 
         }
 
